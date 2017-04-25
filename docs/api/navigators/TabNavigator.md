@@ -79,8 +79,8 @@ The route configs object is a mapping from route name to a route config, which t
 
 ### TabNavigatorConfig
 
-- `tabBarComponent` - component to use as the tab bar, e.g. `TabView.TabBarBottom`
-(this is the default on iOS), `TabView.TabBarTop`
+- `tabBarComponent` - component to use as the tab bar, e.g. `TabBarBottom`
+(this is the default on iOS), `TabBarTop`
 (this is the default on Android)
 - `tabBarPosition` - position of the tab bar, can be `'top'` or `'bottom'`
 - `swipeEnabled` - whether to allow swiping between tabs
@@ -164,7 +164,7 @@ React Element or a function that given `{ focused: boolean, tintColor: string }`
 
 #### `tabBarLabel`
 
-Title string of a tab displayed in the tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
+Title string of a tab displayed in the tab bar or React Element or a function that given `{ focused: boolean, tintColor: string }` returns a React.Element, to display in tab bar. When undefined, scene `title` is used. To hide, see `tabBarOptions.showLabel` in the previous section.
 
 ### Navigator Props
 

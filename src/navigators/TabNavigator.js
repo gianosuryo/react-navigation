@@ -7,6 +7,9 @@ import createNavigator from './createNavigator';
 import createNavigationContainer from '../createNavigationContainer';
 import TabRouter from '../routers/TabRouter';
 import TabView from '../views/TabView/TabView';
+import TabBarTop from '../views/TabView/TabBarTop';
+import TabBarBottom from '../views/TabView/TabBarBottom';
+
 import NavigatorTypes from './NavigatorTypes';
 
 import type { TabViewConfig } from '../views/TabView/TabView';
@@ -38,33 +41,37 @@ const TabNavigator = (
   } = mergedConfig;
 
   const router = TabRouter(routeConfigs, tabsConfig);
-  const navigator = createNavigator(router, routeConfigs, config, NavigatorTypes.STACK)(
-    (props: *) => (
-      <TabView
-        {...props}
-        tabBarComponent={tabBarComponent}
-        tabBarPosition={tabBarPosition}
-        tabBarOptions={tabBarOptions}
-        swipeEnabled={swipeEnabled}
-        animationEnabled={animationEnabled}
-        lazyLoad={lazyLoad}
-      />
-    ),
-  );
+
+  const navigator = createNavigator(
+    router,
+    routeConfigs,
+    config,
+    NavigatorTypes.STACK,
+  )((props: *) => (
+    <TabView
+      {...props}
+      tabBarComponent={tabBarComponent}
+      tabBarPosition={tabBarPosition}
+      tabBarOptions={tabBarOptions}
+      swipeEnabled={swipeEnabled}
+      animationEnabled={animationEnabled}
+      lazyLoad={lazyLoad}
+    />
+  ));
 
   return createNavigationContainer(navigator, tabsConfig.containerOptions);
 };
 
 const Presets = {
   iOSBottomTabs: {
-    tabBarComponent: TabView.TabBarBottom,
+    tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     swipeEnabled: false,
     animationEnabled: false,
     lazyLoad: false,
   },
   AndroidTopTabs: {
-    tabBarComponent: TabView.TabBarTop,
+    tabBarComponent: TabBarTop,
     tabBarPosition: 'top',
     swipeEnabled: true,
     animationEnabled: true,
@@ -93,7 +100,9 @@ const Presets = {
 TabNavigator.Presets = {
   iOSBottomTabs: Presets.iOSBottomTabs,
   AndroidTopTabs: Presets.AndroidTopTabs,
-  Default: Platform.OS === 'ios' ? Presets.iOSBottomTabs : Presets.AndroidTopTabs,
+  Default: Platform.OS === 'ios'
+    ? Presets.iOSBottomTabs
+    : Presets.AndroidTopTabs,
 };
 
 export default TabNavigator;
