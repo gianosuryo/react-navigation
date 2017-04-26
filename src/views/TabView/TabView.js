@@ -56,7 +56,7 @@ let TabViewPager;
 
 switch (Platform.OS) {
   case 'android':
-    TabViewPager = TabViewPagerScroll;
+    TabViewPager = TabViewPagerAndroid;
     break;
   case 'ios':
     TabViewPager = TabViewPagerScroll;
